@@ -868,7 +868,18 @@ doc.autoTable({
     tableWidth: 550
   });
 
-  doc.save(`Voucher_${row[4]||'record'}.pdf`);
+   const url = URL.createObjectURL(doc.output("blob"));
+  const w = window.open(url, "_blank");
+  if (w) {
+    w.addEventListener("load", () => {
+      setTimeout(() => {
+        w.focus();
+        w.print();
+        // let the print preview fetch the blob before revoking
+        setTimeout(() => URL.revokeObjectURL(url), 15000);
+      }, 600);
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded',()=>addRow());

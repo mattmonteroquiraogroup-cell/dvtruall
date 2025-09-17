@@ -12,6 +12,9 @@ error_reporting(E_ALL);
 
 require __DIR__ . '/vendor/autoload.php';
 
+// Tell Google API where to find the service account key
+putenv('GOOGLE_APPLICATION_CREDENTIALS=/etc/secrets/google-key.json');
+
 use Dotenv\Dotenv;   // 👈 make sure this is correct
 
 $dotenv = Dotenv::createImmutable(__DIR__);
@@ -256,3 +259,4 @@ if ($action === 'delete') {
 } catch (Exception $e) {
     echo json_encode(["ok" => false, "error" => $e->getMessage()]);
 }
+

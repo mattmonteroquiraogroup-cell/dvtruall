@@ -12,10 +12,6 @@ error_reporting(E_ALL);
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Dotenv\Dotenv;   // 👈 make sure this is correct
-
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 
 
 
@@ -256,5 +252,6 @@ if ($action === 'delete') {
 } catch (Exception $e) {
     echo json_encode(["ok" => false, "error" => $e->getMessage()]);
 }
+
 
 
